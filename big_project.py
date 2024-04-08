@@ -414,24 +414,6 @@ time_sum = 0
 framerate = 1/0.05
 vid = cv2.VideoWriter('video.mp4',cv2.VideoWriter_fourcc(*'mp4v'),framerate, (600,600))
 
-# find number of each particle
-
-N_A = 0
-N_B = 0
-N_C = 0
-
-for i in range(len(p_list[4])):
-    if p_list[4][i] == 10:
-        N_A += 1
-    elif p_list[4][i] == 17.5:
-        N_B += 1
-    elif p_list[4][i] == 25:
-        N_C += 1
-
-
-file = open("log.txt", "w")
-file.write(str(round(time_sum,2)) + " " + str(N_A) + " " + str(N_B) + " " + str(N_C) + " " + "\n")
-file.close()
 
 while time_sum <40:
     
@@ -440,63 +422,10 @@ while time_sum <40:
     
     time_sum = time_sum + 0.05
 
-    file = open("log.txt", "a")
-
-    file.write(str(round(time_sum,2)) + " " + str(N_A) + " " + str(N_B) + " " + str(N_C) + " " + "\n")
-
-    file.close()
 
 
 print("video released")
 vid.release()
 
 
-# plot
-
-file = open("log.txt", "r")
-data = file.readlines()
-
-time = []
-A = []
-B = []
-C = []
-
-for i in range(len(data)):
-
-    if i%10 == 0:
-
-        parsed = data[i].split(" ")
-
-        time.append(float(parsed[0]))
-
-        A.append(int(parsed[1]))
-
-        B.append(int(parsed[2]))
-
-        C.append(int(parsed[3]))
-
- 
-
-
-
-plt.plot(time, A, label = "A")
-
-plt.plot(time, B, label = "B")
-
-plt.plot(time, C, label = "C")
-
- 
-
-plt.locator_params(axis='y', nbins=6)
-
- 
-
-plt.xlabel("time")
-
-
- 
-
-plt.legend()
-
-plt.show()
 
